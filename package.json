@@ -1,0 +1,19 @@
+{
+  "name": "solana-blinks",
+  "version": "1.0.0",
+  "description": "simple project to learn blinks and actions",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "node --watch server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/actions": "^1.6.2",
+    "@solana/web3.js": "^1.95",
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  }
+}
