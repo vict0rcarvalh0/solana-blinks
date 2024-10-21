@@ -10,7 +10,7 @@ import {
 } from "@solana/web3.js";
 import { createPostResponse, actionCorsMiddleware } from "@solana/actions";
 
-const DEFAULT_SOL_ADDRESS = Keypair.generate().publicKey;
+const DEFAULT_SOL_ADDRESS = "2nuW7MWYsGdLmsSf5mHrjgn6NqyrS5USai6fdisnUQc4";
 const DEFAULT_SOL_AMOUNT = 1;
 const connection = new Connection(clusterApiUrl("devnet"));
 
@@ -45,19 +45,21 @@ function getActionsJson(req, res) {
 
 async function getTransferSol(req, res) {
   try {
+    console.log("req", req);
     const { toPubkey } = validatedQueryParams(req.query);
-    const baseHref = `${BASE_URL}/api/actions/transfer-sol?to=${toPubkey.toBase58()}`;
+    console.log("toPubkey", toPubkey);
+    const baseHref = `${BASE_URL}/api/actions/transfer-sol?to=${toPubkey}`;
 
     const payload = {
       type: "action",
-      title: "Actions Example - Transfer Native SOL",
+      title: "Transfer Native SOL",
       icon: "https://solana-actions.vercel.app/solana_devs.jpg",
       description: "Transfer SOL to another Solana wallet",
       links: {
         actions: [
+          { label: "Send 0.1 SOL", href: `${baseHref}&amount=0.1` },
+          { label: "Send 0.5 SOL", href: `${baseHref}&amount=0.5` },
           { label: "Send 1 SOL", href: `${baseHref}&amount=1` },
-          { label: "Send 5 SOL", href: `${baseHref}&amount=5` },
-          { label: "Send 10 SOL", href: `${baseHref}&amount=10` },
           {
             label: "Send SOL",
             href: `${baseHref}&amount={amount}`,
